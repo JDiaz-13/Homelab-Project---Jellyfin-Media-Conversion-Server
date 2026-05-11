@@ -1,2 +1,33 @@
-# Homelab-Project---Jellyfin-Media-Conversion-Server
-Jellyfin and automated media conversion server. This is a project that originally began as a fun challenging experience 3 years ago. It was originally meant to simply help me understand core concepts I studied for to pass my Comptia A+, Net+, and Sec+; it turned into a small service for 12 daily users.
+# Homelab Project - Jellyfin / Media Conversion Server
+## Overview
+
+This project is a 4 node homelab media infrastructure centered around Jellyfin for media playback and automated scripting for media conversion via FFmpeg.
+
+## Architecture
+( PENDING )
+
+## Hardware
+
+ Host / Purpose
+-------------------
+node-1 = Jellyfin / Wreguard Server 
+node-2 = TrueNAS SCALE Storage / Monitoring 
+node-3 = Media Converter ( FFmpeg ) #1
+node-4 = Media Converter ( FFmpeg ) #2  
+
+## Services
+
+- Jellyfin
+- FFmpeg
+- Wireguard
+
+## Documentation
+( PENDING )
+
+## Screenshots
+
+(PENDING)
+
+## Lessons Learned
+
+( PENDING )
