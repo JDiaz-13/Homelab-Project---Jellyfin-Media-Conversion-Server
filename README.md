@@ -10,10 +10,10 @@ This project is a 4 node homelab media infrastructure centered around Jellyfin f
 
  Host / Purpose
 -------------------
-node-1 = Jellyfin / Wreguard Server 
-node-2 = TrueNAS SCALE Storage / Monitoring 
-node-3 = Media Converter ( FFmpeg ) #1
-node-4 = Media Converter ( FFmpeg ) #2  
+-node-1 = Jellyfin / Wreguard Server 
+-node-2 = TrueNAS SCALE Storage / Monitoring 
+-node-3 = Media Converter ( FFmpeg ) #1
+-node-4 = Media Converter ( FFmpeg ) #2  
 
 ## Services
 
