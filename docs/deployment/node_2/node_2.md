@@ -15,4 +15,5 @@ Bare metal install for maximum reliability of TrueNAS SCALE.
 - Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
 - 32 GB RAM
 - 34 TB HDD RAID-Z1 vdev (1 Parity Drive)
+- 6Gbps SAS HBA Controller card
 ---
