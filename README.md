@@ -21,8 +21,9 @@ This project is a 4 node homelab media infrastructure centered around Jellyfin f
 - FFmpeg
 - Wireguard
 
-## Documentation
-( PENDING )
+## Documentation 
+- [Click here](/docs/)
+
 
 ## Screenshots
 ### TrueNAS SCALE Dashboard
