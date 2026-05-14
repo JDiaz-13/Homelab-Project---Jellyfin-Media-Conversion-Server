@@ -4,11 +4,13 @@
 This project is a 4 node homelab media infrastructure centered around Jellyfin for media playback and automated scripting for media conversion via FFmpeg.
 
 ## Architecture
-( PENDING )
+
+<img width="781" height="695" alt="image" src="https://github.com/user-attachments/assets/92b3f457-3820-467c-9266-bc4feed6ef85" />
+
 
 ## Hardware
 
- Host / Purpose
+ ### Host / Purpose
 -------------------
 - node-1 = Jellyfin / Wireguard Server<br/> 
 - node-2 = TrueNAS SCALE Storage / Monitoring<br/>
