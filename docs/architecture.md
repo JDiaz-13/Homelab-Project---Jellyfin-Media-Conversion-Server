@@ -20,3 +20,6 @@ This is a remote access to internal LAN self hosted services that is secured by 
 
 
 ## Security Design
+
+<img width="751" height="755" alt="image" src="https://github.com/user-attachments/assets/3994c8fa-effd-49d3-a161-7b2e0293483d" />
+
