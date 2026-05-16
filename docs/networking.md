@@ -1,51 +1,46 @@
-# 🌐 Network Topology & Configuration
+# Network Topology & Configuration
 
 This document outlines the network architecture, port allocations, and security measures implemented in this media server deployment.
 
-## 🗺️ Network Architecture
+## Network Architecture
 
 ```mermaid
 graph TD
-    Client[User/Client Device] -->|HTTPS 443 / Tailscale| FW[Firewall / Router]
-    FW -->|Port Forward / Internal Routing| RP[Reverse Proxy: Caddy/Nginx]
+    Client[User/Client Device] -->|UDP 51820 / Wireguard| FW[Firewall / Router]
+    FW -->|Port Forward / Internal Routing| WG[Wireguard Server: node_1]
     
-    subgraph Docker Internal Network (172.20.0.0/16)
-        RP -->|HTTP 8096| JF[Jellyfin Server]
-        RP -->|HTTP 8989| SR[Sonarr]
-        RP -->|HTTP 7878| RD[Radarr]
+    subgraph Internal Network (192.168.81.0/24)
+        WG -->|HTTP 8096| JF[Jellyfin Server]
+        WG -->|HTTP 8267| TD[Tdarr]
         
-        SR -->|API / HTTP| DL[Download Client]
-        RD -->|API / HTTP| DL
         
-        MC[Media Converter: Tdarr/Unmanic] -->|Watch Folder| NAS[(Storage / NAS)]
+        
+        MC[Media Converter: Tdarr] -->|Watch Folder| NAS[(node_2 / NAS)]
         JF -->|Read Only| NAS
     end
 ```
 
-## 🚪 Port Matrix
+## Port Matrix
 
 
 | Service | Internal Port | Host Port | Protocol | Access Level | Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Jellyfin** | 8096 | 8096 | TCP | LAN / WAN | Media streaming web interface |
-| **Reverse Proxy**| 80 / 443 | 80 / 443 | TCP | WAN | Inbound SSL termination |
-| **Sonarr** | 8989 | None (Internal)| TCP | Internal | TV Show automation engine |
-| **Radarr** | 7878 | None (Internal)| TCP | Internal | Movie automation engine |
-| **qBittorrent** | 8080 | 8080 | TCP | LAN Only | Download client Web UI |
+| **Jellyfin** | 8096 | 8096 | TCP | LAN Only| Media streaming web interface |
+| **Wireguard**| 51820 | 51820 | UDP | WAN | VPN server / exit node for remote clients |
 | **Tdarr Node** | 8267 | 8267 | TCP | LAN Only | Media transcoding node |
 
-## 🔒 Traffic Isolation & Security
+## Traffic Isolation & Security
 
-### 1. Docker Network Segregation
-* **Frontend Network:** Only the Reverse Proxy and Jellyfin are exposed to this bridge network.
-* **Backend Network:** The Arr stack (`Sonarr`, `Radarr`, `Download Client`) communicates on an isolated backend network with no direct host port exposure.
+### 1. Network Segregation
+* **Frontend Network:** Only the Wireguard server is exposed via PORT# 51820 UDP protocol.
+* **Backend Network:** The NAS and FFmpeg encoders that run Tdarr communicate on an isolated backend network with no access to WAN network.
 
 ### 2. External Access & Edge Security
-* **SSL/TLS:** Automated certificate renewal managed via ACME / Let's Encrypt.
-* **VPN Option:** Remote access outside the reverse proxy is locked down via a **Tailscale Mesh VPN** / **WireGuard** tunnel. 
-* **Local DNS:** Split-horizon DNS maps `yourdomain.com` to the local LAN IP when at home, bypassing the WAN.
 
-## 📂 Storage Protocols
-* **Local Mounts:** High-speed NVMe scratch disks mounted via Docker bind-mounts for active downloads and transcoding cache.
-* **Network Shares:** Mass storage pooled via `NFSv4` or `SMB3` with explicit read/write vs read-only permissions per container.
+* **VPN Option:** Remote access outside is locked down and only accessible via a **WireGuard** split tunnel VPN. 
+* **DDNS:** Current ISP does not offer static IP addresses for residential, to overcome constantly updating VPN endpoint ip-address a DDNS was implemented via [Dynu.com](https://www.dynu.com/) .
+
+## Storage Protocols
+
+* **Network Shares:** Mass storage pooled via `SMB3` with explicit read/write vs read-only permissions per service use.
 
