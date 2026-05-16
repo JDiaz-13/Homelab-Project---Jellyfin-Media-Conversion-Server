@@ -15,4 +15,8 @@ This is a remote access to internal LAN self hosted services that is secured by 
 
 
 ## Storage Architecture
+
+<img width="604" height="599" alt="image" src="https://github.com/user-attachments/assets/a0b96b34-45ee-4402-9764-35b5214ef110" />
+
+
 ## Security Design
