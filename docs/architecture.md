@@ -10,5 +10,9 @@ This is a remote access to internal LAN self hosted services that is secured by 
 
 
 ## Service Communication
+
+<img width="575" height="649" alt="image" src="https://github.com/user-attachments/assets/04d941b2-ab6b-4068-bb22-fa763eaf1c6a" />
+
+
 ## Storage Architecture
 ## Security Design
